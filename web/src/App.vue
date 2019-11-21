@@ -1,9 +1,7 @@
 <template>
   <div class="appContainer">
     <Header v-if="this.$route.name != 'home'"></Header>
-    <div class="main">
-      <router-view/>
-    </div>
+    <router-view/>
   </div>
 </template>
 

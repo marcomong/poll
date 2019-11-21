@@ -1,21 +1,31 @@
 <template>
   <div class="home">
-    <div class="home__actions">
-      <button class="btn btn__white">
-        <img src="@/assets/question-mark.svg" alt="question mark" class="btn__image">
-        <p>Create</p>
-      </button>
-      <button class="btn btn__green">
-        <img src="@/assets/pencil.svg" alt="question mark" class="btn__image">
-        <p>Answer</p>
+    <div class="home__container">
+      <div class="home__actions">
+        <button class="btn btn__white">
+          <div class="btn__imageContainer">
+            <img src="@/assets/question-mark.svg" alt="question mark" class="btn__imageContainer__image">
+          </div>
+          <div class="btn__title">
+            <p>Create</p>
+          </div>
         </button>
-    </div>
-    <div class="home__separator">
-    </div>
-    <div class="home__intro">
-      <h2>Give your answer</h2>
-      <h2>Make it count</h2>
-      <h2>Real time</h2>
+        <button class="btn btn__green" @click="goToRoute('pollCode')">
+          <div class="btn__imageContainer">
+            <img src="@/assets/check-square-regular.svg" alt="question mark" class="btn__imageContainer__image">
+          </div>
+          <div class="btn__title">
+            <p>Answer</p>
+          </div>
+        </button>
+      </div>
+      <div class="home__separator">
+      </div>
+      <div class="home__intro">
+        <h2>Give your answer</h2>
+        <h2>Make it count</h2>
+        <h2>Real time</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +37,11 @@ export default {
     ...mapGetters(['isUserLoggedIn']),
     isLoggedIn () {
       return this.isUserLoggedIn
+    }
+  },
+  methods: {
+    goToRoute (route) {
+      this.$store.commit('goToRoute', { routeName: route })
     }
   }
 }

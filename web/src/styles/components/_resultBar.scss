@@ -1,0 +1,51 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-white;
+
+    &-answer {
+      font-size: 2rem;
+      font-weight: 00;
+    }
+
+    &-percentage {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  &__bar {
+    width: 100%;
+    position: relative;
+    margin: .5rem 0 1rem 0;
+    border-radius: 100rem;
+    overflow: hidden;
+    height: 1.2rem;
+
+    &-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba($color-secondary-light, 0.5);
+      height: 100%;
+      z-index: 1;
+    }
+
+    &-front {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-radius: 100rem;
+      background-color: $color-primary;
+      z-index: 2;
+    }
+  }
+}

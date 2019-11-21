@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
 }
 
 .user {
@@ -17,6 +16,10 @@
   align-items: center;
   align-self: stretch;
   padding: 0 .5rem;
+
+  & > a {
+    color: $color-white-light;
+  }
 
   &:hover {
     cursor: pointer;

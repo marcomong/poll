@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '@/router'
 
 import auth from './modules/auth'
 import error from './modules/error'
@@ -17,6 +18,9 @@ export default new Vuex.Store({
   mutations: {
     setUserInfo (state, payload) {
       state.user = payload
+    },
+    goToRoute (_, payload) {
+      router.push({ name: payload.routeName, params: payload.parameters })
     }
   },
   actions: {

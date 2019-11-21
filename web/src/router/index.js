@@ -4,6 +4,11 @@ import Home from '@/views/Home.vue'
 import LogIn from '@/views/LogIn.vue'
 import SignUp from '@/views/SignUp.vue'
 
+import Answer from '@/views/Answer/Answer.vue'
+import PollCode from '@/views/Answer/PollCode.vue'
+import Poll from '@/views/Answer/Poll.vue'
+import Statistics from '@/views/Answer/Statistics.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +26,27 @@ const routes = [
     path: '/signUp',
     name: 'signUp',
     component: SignUp
+  },
+  {
+    path: '/answer',
+    component: Answer,
+    children: [
+      {
+        path: '',
+        name: 'pollCode',
+        component: PollCode
+      },
+      {
+        path: 'poll',
+        name: 'poll',
+        component: Poll
+      },
+      {
+        path: 'statistics/:code',
+        name: 'statistics',
+        component: Statistics
+      }
+    ]
   }
 ]
 

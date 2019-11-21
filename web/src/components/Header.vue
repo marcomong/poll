@@ -1,7 +1,7 @@
 <template>
    <header class="header">
      <router-link to="/">
-      <img src="@/assets/SVG/home.svg" alt="home" class="home-icon">
+      LOGO
      </router-link>
       <nav class="user">
         <div class="authContainer" v-if="!isLoggedIn && this.$route.name != 'logIn'">

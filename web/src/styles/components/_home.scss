@@ -1,8 +1,17 @@
 .home {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  margin: 0 5rem;
+  height: 100%;
+
+  &__container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 5rem;
+  }
+
 
   &__actions {
     display: flex;

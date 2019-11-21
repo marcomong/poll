@@ -1,8 +1,8 @@
 .btn {
   border: none;
   padding: 1rem;
-  width: 100%;
   font-weight: 400;
+  padding: 1rem 4rem;
   font-size: 2rem;
   border-radius: 100rem;
   outline: none;
@@ -26,8 +26,12 @@
 
     &:hover {
       background-color: $color-secondary;
-      font-weight: bold;
       cursor: pointer;
+    }
+
+    &-disabled {
+      background-color: rgba($color-primary, 0.3);
+      color: $color-gray;
     }
   }
 
@@ -36,19 +40,30 @@
     color: $color-secondary;
 
     &:hover {
-      background-color: $color-white;
-      font-weight: bold;
+      background-color: $color-secondary;
+      color: $color-white-light;
       cursor: pointer;
     }
   }
   
-  &__image {
+  &__imageContainer {
     display: flex;
     justify-content: center;
-    flex: 1;
-    margin: 0;
-    padding: 0;
+    width: 20%;
     height: 3rem;
+
+    &__image {
+      width: 100%;
+    }
   }
+
+  &__title {
+    width: 80%;
+  }
+
+  // &__image {
+  //   height: 100%;
+  //   width: auto;
+  // }
 
 }
