@@ -3,22 +3,25 @@
     <div class="question">
       What is your favorite animal?
     </div>
-    <div class="answer">
-      <div v-for="answer in answers" :key="answer._id" class="answer__wrapper" @click="answerSelected(answer)">
-        <div class="answer__radio" :class="{'answer__radio-selected': answer.selected, 'answer__radio-notSelected': !answer.selected}"></div>
-        <div class="answer__content" :class="{'answer__content-selected': answer.selected}">{{answer.value}}</div>
-      </div>
+    <div class="answersContainer">
+      <AnswerRadio v-for="answer in answers" :key="answer._id"
+        :value="answer"
+        :isEditing= false
+        @click.native="answerSelected(answer)">
+      </AnswerRadio>
     </div>
     <div>
       <button class="btn btn__green" :class="{'btn__green-disabled': !canSendAnswer}" :disabled="!canSendAnswer" @click="sendVote()">Vote</button>
     </div>
-    <p class="answer__code">
-      Poll: {{code}}
+    <p class="answerPollCode">
+      Poll: <strong>{{code}}</strong>
     </p>
   </div>
 </template>
 
 <script>
+import AnswerRadio from '@/components/AnswerRadio.vue'
+
 export default {
   data () {
     return {
@@ -42,6 +45,9 @@ export default {
         }
       ]
     }
+  },
+  components: {
+    AnswerRadio
   },
   methods: {
     answerSelected (answer) {

@@ -2,7 +2,7 @@
   <div class="home">
     <div class="home__container">
       <div class="home__actions">
-        <button class="btn btn__white">
+        <button class="btn btn__white" @click="goToRoute('definePoll')">
           <div class="btn__imageContainer">
             <img src="@/assets/question-mark.svg" alt="question mark" class="btn__imageContainer__image">
           </div>

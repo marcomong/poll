@@ -4,10 +4,16 @@ import Home from '@/views/Home.vue'
 import LogIn from '@/views/LogIn.vue'
 import SignUp from '@/views/SignUp.vue'
 
+// ANSWER
 import Answer from '@/views/Answer/Answer.vue'
 import PollCode from '@/views/Answer/PollCode.vue'
 import Poll from '@/views/Answer/Poll.vue'
 import Statistics from '@/views/Answer/Statistics.vue'
+
+// CREATE
+import Create from '@/views/Create/Create.vue'
+import DefinePoll from '@/views/Create/DefinePoll.vue'
+import PollInfo from '@/views/Create/PollInfo.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +51,22 @@ const routes = [
         path: 'statistics/:code',
         name: 'statistics',
         component: Statistics
+      }
+    ]
+  },
+  {
+    path: '/create',
+    component: Create,
+    children: [
+      {
+        path: '',
+        name: 'definePoll',
+        component: DefinePoll
+      },
+      {
+        path: 'pollInfo',
+        name: 'pollInfo',
+        component: PollInfo
       }
     ]
   }

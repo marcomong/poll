@@ -20,53 +20,18 @@
   }
 }
 
-.answer {
+.answersContainer {
   display: flex;
   flex-direction: column;
   margin-bottom: 4rem;
+  width: 100%;
+}
 
-  &__wrapper {
-    display: flex;
-    margin: 1rem 0;
-    align-items: center;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  &__radio {
-    width: 2rem;
-    height: 2rem;
-    background-color: red;
-    border-radius: 100rem;
-    margin-right: 1rem;
-
-    &-selected {
-      background-color: $color-primary;
-    }
-
-    &-notSelected {
-      background-color: rgba($color-secondary-light, 0.5);
-    }
-  }
-
-  &__content {
-    color: $color-white;
-    font-size: 2rem;
-    font-weight: 300;
-
-    &-selected {
-      font-weight: 400;
-    }
-  }
-
-  &__code {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    color: $color-gray;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
-  }
+.answerPollCode {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: $color-gray;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
 }

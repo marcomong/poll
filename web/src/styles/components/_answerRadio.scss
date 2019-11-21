@@ -1,0 +1,53 @@
+.answer {
+  display: flex;
+  margin: 1rem 0;
+  align-items: center;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__radio {
+    width: 2rem;
+    height: 2rem;
+    background-color: red;
+    border-radius: 100rem;
+    margin-right: 1rem;
+    background-color: rgba($color-secondary-light, 0.5);
+
+    &-selected {
+      background-color: $color-primary;
+    }
+  }
+  
+  &__content {
+    color: $color-white;
+    font-size: 2rem;
+    font-weight: 300;
+  
+    &-selected {
+      font-weight: 400;
+    }
+    
+    &--input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-weight: 400;
+      width: 100%;
+
+      &::placeholder {
+        color: $color-blue-light;
+      }
+    }
+  }
+
+  &__closeBtn {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    left: 0;
+    transform: translateX(-3rem);
+  }
+}

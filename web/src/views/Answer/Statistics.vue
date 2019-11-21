@@ -8,6 +8,9 @@
       :percentage="answer.percentage"
       :answer="answer.value">
     </ResultBar>
+    <div class="statistics__btn">
+      <button class="btn btn__green">JOIN NEW POLL</button>
+    </div>
   </div>
 </template>
 
@@ -43,3 +46,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+@import "@/styles/components/answer/_statistics.scss";
+</style>
