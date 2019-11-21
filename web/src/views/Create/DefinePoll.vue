@@ -14,13 +14,17 @@
         :value.sync="answer"
         :isEditing= true>
       </AnswerRadio>
-      <button class="btn definePoll__addAnswerBtn" @click="addAnswer()">
+      <button class="definePoll__addAnswerBtn" @click="addAnswer()">
         <img src="@/assets/plus-solid.svg" alt="add" class="definePoll__addAnswerBtn-image">
       </button>
     </div>
     <div class="pageActions">
       <button class="btn btn__white pageActions__btn" @click="cancel()">cancel</button>
-      <button class="btn btn__green pageActions__btn" :class="{'btn__green-disabled': !isSaveAvailable}" :disabled="!isSaveAvailable" @click="save()">Save</button>
+      <button class="btn btn__green pageActions__btn"
+      :class="{'btn__green-disabled': !isSaveAvailable}"
+      :disabled="!isSaveAvailable" @click="save()">
+        Create
+      </button>
     </div>
   </div>
 </template>

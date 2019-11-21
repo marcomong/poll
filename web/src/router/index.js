@@ -43,7 +43,7 @@ const routes = [
         component: PollCode
       },
       {
-        path: 'poll',
+        path: 'poll/:code',
         name: 'poll',
         component: Poll
       },

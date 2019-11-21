@@ -1,0 +1,44 @@
+.pollInfo {
+  display: flex;
+  flex-direction: column;
+  max-width: 60rem;
+  width: 100%;
+  margin: 0 auto;
+  flex-grow: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__header {
+    color: $color-white;
+    margin-bottom: 2rem;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+
+    &__title {
+      color: $color-white;
+      margin-bottom: .5rem;
+    }
+
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &__value {
+        color: $color-primary;
+        font-size: 2rem;
+        font-weight: 300;
+
+        & > a {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}

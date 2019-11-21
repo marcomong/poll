@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     goToRoute (route) {
-      return this.$store.commit('goToRoute', { routeName: route })
+      return this.$store.commit('goToRoute', { routeName: route, parameters: { code: this.code } })
     }
   },
   watch: {

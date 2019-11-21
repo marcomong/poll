@@ -17,8 +17,6 @@
     flex-direction: column;
     color: $color-white;
 
-
-
     &__content {
       background-color: transparent;
       font-size: 3rem;
@@ -45,6 +43,8 @@
     width: 4rem;
     border-radius: 100rem;
     background-color: $color-primary;
+    border: none;
+    outline: none;
 
     &:hover {
       background-color: $color-secondary;

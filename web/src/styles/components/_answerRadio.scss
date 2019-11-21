@@ -3,6 +3,7 @@
   margin: 1rem 0;
   align-items: center;
   position: relative;
+  align-items: center;
 
   &:hover {
     cursor: pointer;
@@ -48,6 +49,6 @@
     width: 1.5rem;
     height: 1.5rem;
     left: 0;
-    transform: translateX(-3rem);
+    transform: translateX(-2.2rem);
   }
 }
