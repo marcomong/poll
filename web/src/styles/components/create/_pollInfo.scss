@@ -10,9 +10,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
+  @include respond(phone) {
+    padding: 0 2rem;
+  }
+
   &__header {
     color: $color-white;
     margin-bottom: 2rem;
+
+    @include respond(phone) {
+      font-size: $font-size-medium;
+    }
   }
 
   &__section {
@@ -32,8 +40,12 @@
 
       &__value {
         color: $color-primary;
-        font-size: 2rem;
+        font-size: $font-size-medium;
         font-weight: 300;
+
+        @include respond(phone) {
+          font-size: $font-size-xsmall;
+        }
 
         & > a {
           color: $color-primary;

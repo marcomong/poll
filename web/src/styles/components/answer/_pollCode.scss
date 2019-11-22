@@ -7,11 +7,17 @@
 
   max-width: 50rem;
   margin: 0 auto;
+
+  transform: translateY(-2rem);
 }
 
 .header {
   color: $color-white-light;
   margin-bottom: 2rem;
+
+  @include respond(tab-port) {
+    font-size: $font-size-medium;
+  }
 }
 
 .pollCode {

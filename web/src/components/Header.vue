@@ -1,15 +1,15 @@
 <template>
    <header class="header">
      <router-link to="/">
-      LOGO
+      <p class="logo">LetMeAnswer</p>
      </router-link>
       <nav class="user">
-        <div class="authContainer" v-if="!isLoggedIn && this.$route.name != 'logIn'">
+        <div class="authContainer" v-if="!isLoggedIn && this.$route.name != 'logIn' && false">
           <router-link to="/logIn">
             LOGIN
           </router-link>
         </div>
-        <div class="authContainer" v-if="isLoggedIn" @click="performLogout()">
+        <div class="authContainer" v-if="isLoggedIn " @click="performLogout()">
           LOGOUT
         </div>
       </nav>

@@ -8,10 +8,20 @@
 
 .question {
   color: $color-white;
-  font-size: 3rem;
+  font-size: $font-size-large;
   font-weight: 600;
   width: 100%;
   margin-bottom: 3rem;
+
+  @include respond(tab-port) {
+    font-size: $font-size-medium;
+  }
+
+  & > .numOfVotes {
+    font-size: $font-size-xsmall;
+    font-weight: 300;
+    color: rgba($color-white, 0.7);
+  }
 
   &__code {
     font-weight: 400;

@@ -2,8 +2,8 @@
   border: none;
   padding: 1rem;
   font-weight: 400;
-  padding: 1rem 4rem;
-  font-size: 2rem;
+  padding: .7rem 3rem;
+  font-size: $font-size-small;
   border-radius: 100rem;
   outline: none;
   text-transform: uppercase;
@@ -11,6 +11,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include respond(tab-port) {
+    font-size: $font-size-xsmall;
+    padding: .6rem 2rem;
+  }
 
   & > p {
     margin: 0;
@@ -61,6 +66,11 @@
     justify-content: center;
     width: 20%;
     height: 3rem;
+
+    @include respond(tab-port) {
+      height: 2.5rem;
+      width: 15%;
+    }
 
     &__image {
       width: 100%;

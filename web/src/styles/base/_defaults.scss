@@ -36,6 +36,21 @@ body {
   flex-direction: column;
   flex-grow: 1;
   padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 1rem;
+  }
+}
+
+.logo {
+  color: $color-white;
+  font-weight: 200;
+  font-size: 2rem;
+  font-family: 'Caveat', cursive;
+
+  &:hover {
+    color: rgba($color-white, 0.7);
+  }
 }
 
 a {
