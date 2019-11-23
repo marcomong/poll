@@ -3,9 +3,9 @@ module.exports = {
     port: process.env.PORT || 8082
   },
   db: {
-    server: process.env.MONGODB_SERVER || 'localhost',
-    port: process.env.MONGODB_PORT || '27017',
-    name: process.env.MONGODB_AUTH_NAME || 'auth'
+    server: process.env.DB_SERVER || 'localhost',
+    port: process.env.DB_PORT || '27017',
+    name: process.env.DB_NAME || 'auth'
   },
   jwt: {
     token_secret: process.env.JWT_TOKEN_SECRET || 'shhhhhh',

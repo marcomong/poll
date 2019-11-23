@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const log = require('./configurations/logger')
+const Response = require('./models/Response')
 require('./configurations/db')
 
 const config = require('./configurations/config')
@@ -23,6 +24,10 @@ app.use(bodyParser.urlencoded({
 app.set('port', config.app.port)
 
 app.use('/auth', AuthRoutes)
+
+app.use((_, res) => {
+  return new Response(res, 404, 'End point not valid').send()
+})
 
 app.listen(app.get('port'), function () {
   log.info(`listening on port ${port}`)
