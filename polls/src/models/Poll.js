@@ -11,6 +11,17 @@ class Poll {
     this.userId = userId
   }
 
+  getPollInfo() {
+    let pollInfo = {
+      code: this.code,
+      statistics: this.answerPercentages,
+      question: this.question,
+      votes: this.numberOfVotes,
+      answers: this.answers
+    }
+    return pollInfo
+  }
+
   get numberOfVotes() {
     return this.votes.length
   }

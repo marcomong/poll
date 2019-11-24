@@ -66,10 +66,11 @@ const actions = {
     }
     PollService.answerPoll(body)
       .then((res) => {
-        commit('goToRoute', { routeName: 'statistics', parameters: { code: this.code } })
+        commit('goToRoute', { routeName: 'statistics', parameters: { code: state.code } })
       })
       .catch((err) => {
         console.log(err)
+        commit('goToRoute', { routeName: 'statistics', parameters: { code: state.code } })
       })
   },
   retrievePollStatistics ({ commit }, code) {

@@ -26,7 +26,7 @@ function findByCode (req, res) {
    PollSchema.findByCode(code)
     .then(doc => {
       let poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
-      return new Response(res, 200, 'Found poll', poll).send()
+      return new Response(res, 200, 'Found poll', poll.getPollInfo()).send()
     })
     .catch((err) => {
       return new Response(res, 500, err.message).send()
@@ -46,7 +46,7 @@ function vote (req, res) {
         return new Response(res, 400, `Poll Code ${pollCode} does not exists or you have already voted`).send()
       }
       const poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
-      return new Response(res, 200, 'Vote added', poll).send()
+      return new Response(res, 200, 'Vote added', poll.getPollInfo()).send()
     })
     .catch(err => {
       return new Response(res, 500, err.message).send()
@@ -62,14 +62,7 @@ function getPollStatistics (req, res) {
         return new Response(res, 400, `Poll Code ${pollCode} does not exists or you have already voted`).send()
       }
       let poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
-      let pollStatistics = {
-        code: poll.code,
-        statistics: poll.answerPercentages,
-        question: poll.question,
-        votes: poll.numberOfVotes
-      }
-
-      return new Response(res, 200, 'Got Statistics', pollStatistics).send()
+      return new Response(res, 200, 'Got Statistics', poll.getPollInfo()).send()
     })
     .catch(err => {
       return new Response(res, 500, err.message).send()
