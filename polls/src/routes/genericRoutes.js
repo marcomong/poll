@@ -8,6 +8,7 @@ router.post('/save', controller.save)
 router.post('/vote', controller.vote)
 
 // GET
-router.get('/findByCode', controller.findByCode)
+router.get('/findPollByCode', controller.findByCode)
+router.get('/statistics', controller.getPollStatistics)
 
 module.exports = router

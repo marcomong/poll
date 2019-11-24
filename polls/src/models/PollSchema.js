@@ -49,7 +49,23 @@ function findByCode(code) {
 }
 
 function addVotes(pollCode, votingUserId, answers) {
-  const filter = {code: pollCode, votes: { $elemMatch: { votingUserId: {$ne: votingUserId}}}}
+  const filter = {
+    $or: [
+      {
+        $and: [
+          {code: pollCode},
+          {votes : {$exists:true}, $where:'this.votes.length==0'}
+        ]
+      },
+      {
+        $and: [
+          {code: pollCode},
+          {votes : { $elemMatch: { votingUserId: { $ne: votingUserId } } }}
+        ]
+      }
+    ]
+  }
+  // const filter = {code: pollCode, votes: { $elemMatch: { votingUserId: {$ne: votingUserId}}}}
   const votesToAdd = [...answers.map(a => {
     const vote = {
       votingUserId: votingUserId,

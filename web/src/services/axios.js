@@ -19,6 +19,15 @@ authInstance.interceptors.request.use(function (config) {
   return config
 })
 
+export const pollInstance = axios.create({
+  baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost/authApi/' : 'http://localhost:8083/'
+})
+
+pollInstance.interceptors.request.use(function (config) {
+  config.headers.Authorization = getAccessToken()
+  return config
+})
+
 const refreshAuthLogic = failedRequest => authInstance.post('/auth/grantNewAccessToken', getRefreshTokenInfo())
   .then(tokenRefresh => {
     const newToken = tokenRefresh.data.token
@@ -41,3 +50,4 @@ function getAccessToken () {
 
 createAuthRefreshInterceptor(instance, refreshAuthLogic)
 createAuthRefreshInterceptor(authInstance, refreshAuthLogic)
+createAuthRefreshInterceptor(pollInstance, refreshAuthLogic)

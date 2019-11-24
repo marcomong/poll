@@ -1,15 +1,15 @@
 <template>
   <div class="statistics">
     <div class="question">
-      {{ statistics.question }}
+      {{ poll.question }}
       <p class="numOfVotes">
-        VOTES: {{statistics.votes}}
+        VOTES: {{poll.votes}}
       </p>
     </div>
-    <ResultBar v-for="answer in statistics.answers"
-      :key="answer._id"
-      :percentage="answer.percentage"
-      :answer="answer.value">
+    <ResultBar v-for="statistic in poll.statistics"
+      :key="statistic.id"
+      :percentage="`${statistic.percentage.toFixed(0)}%`"
+      :answer="statistic.value">
     </ResultBar>
     <div class="statistics__btn">
       <button class="btn btn__green">JOIN NEW POLL</button>
@@ -20,34 +20,26 @@
 
 <script>
 import ResultBar from '@/components/ResultBar.vue'
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  data () {
-    return {
-      statistics: {
-        votes: 10,
-        question: 'What is your fevorite animal?',
-        answers: [
-          {
-            _id: 1,
-            value: 'Cat',
-            percentage: '10%'
-          },
-          {
-            _id: 2,
-            value: 'Dog',
-            percentage: '30%'
-          },
-          {
-            _id: 3,
-            value: 'Rabbit',
-            percentage: '60%'
-          }
-        ]
-      }
-    }
-  },
   components: {
     ResultBar
+  },
+  computed: {
+    ...mapGetters(['getPoll']),
+    poll () {
+      return this.getPoll
+    }
+  },
+  methods: {
+    ...mapActions(['retrievePollStatistics']),
+    loadPollStatistics (code) {
+      return this.retrievePollStatistics(code)
+    }
+  },
+  created () {
+    const code = this.$route.params.code
+    this.loadPollStatistics(code)
   }
 }
 </script>

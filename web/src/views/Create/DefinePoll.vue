@@ -31,6 +31,7 @@
 
 <script>
 import AnswerRadio from '@/components/AnswerRadio.vue'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -41,11 +42,11 @@ export default {
         question: '',
         answers: [
           {
-            _id: 1,
+            id: 1,
             value: ''
           },
           {
-            _id: 2,
+            id: 2,
             value: ''
           }
         ]
@@ -56,10 +57,11 @@ export default {
     AnswerRadio
   },
   methods: {
+    ...mapActions(['create']),
     addAnswer () {
       this.lastId += 1
       const newAnswer = {
-        _id: this.lastId,
+        id: this.lastId,
         value: ''
       }
       this.poll.answers.push(newAnswer)
@@ -72,7 +74,7 @@ export default {
     },
     save () {
       if (this.isFormValid()) {
-        this.$store.commit('goToRoute', { routeName: 'pollInfo' })
+        return this.create(this.poll)
       }
     },
     isFormValid () {

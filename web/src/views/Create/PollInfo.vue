@@ -7,7 +7,7 @@
       </div>
       <div class="pollInfo__section__content">
         <div class="pollInfo__section__content__value">
-          <a href="http://localhost:8080/answer/poll">http://localhost:8080/answer/poll</a>
+          <a :href="generateAnswerPollUrl()">{{ generateAnswerPollUrl() }}</a>
         </div>
         <button class="btn btn__green btn-small">copy</button>
       </div>
@@ -18,7 +18,7 @@
       </div>
       <div class="pollInfo__section__content">
         <div class="pollInfo__section__content__value">
-          1234
+          {{ poll.code }}
         </div>
         <button class="btn btn__green btn-small">copy</button>
       </div>
@@ -29,13 +29,33 @@
       </div>
       <div class="pollInfo__section__content">
         <div class="pollInfo__section__content__value">
-          <a href="https://votazio.com/pollResults/1234">https://votazio.com/pollResults/1234</a>
+          <a :href="generatePollUrl()">{{ generatePollUrl() }}</a>
         </div>
         <button class="btn btn__green btn-small">copy</button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters(['getPoll']),
+    poll () {
+      return this.getPoll
+    }
+  },
+  methods: {
+    generatePollUrl () {
+      return `http://localhost:8080/poll/${this.poll.code}`
+    },
+    generateAnswerPollUrl () {
+      return `http://localhost:8080/answer/poll/${this.poll.code}`
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 @import "@/styles/components/create/_pollInfo.scss";

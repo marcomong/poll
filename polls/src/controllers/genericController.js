@@ -4,15 +4,10 @@ const Poll = require('../models/Poll')
 const Response = require('../models/Response')
 
 function save (req, res) {
-  const question = 'Come ti chiami?'
-  const answers = [{
-    id: 1,
-    value: 'Marco'
-  },
-  {
-    id: 2,
-    value: 'Polo'
-  }]
+  const { body } = req
+  const question = body.question
+  const answers = body.answers
+
   let newPoll = new Poll(question, answers)
   return PollSchema.savePoll(newPoll)
     .then((doc) => {
@@ -30,7 +25,7 @@ function findByCode (req, res) {
 
    PollSchema.findByCode(code)
     .then(doc => {
-      let poll = new Poll(doc.question, doc.answers, doc.votes, doc._id)
+      let poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
       return new Response(res, 200, 'Found poll', poll).send()
     })
     .catch((err) => {
@@ -50,8 +45,31 @@ function vote (req, res) {
       if(!doc) {
         return new Response(res, 400, `Poll Code ${pollCode} does not exists or you have already voted`).send()
       }
-      const poll = new Poll(doc.question, doc.answers, doc.votes, doc._id)
+      const poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
       return new Response(res, 200, 'Vote added', poll).send()
+    })
+    .catch(err => {
+      return new Response(res, 500, err.message).send()
+    })
+}
+
+function getPollStatistics (req, res) {
+  let code = req.query.code
+
+  PollSchema.findByCode(code)
+    .then(doc => {
+      if(!doc) {
+        return new Response(res, 400, `Poll Code ${pollCode} does not exists or you have already voted`).send()
+      }
+      let poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
+      let pollStatistics = {
+        code: poll.code,
+        statistics: poll.answerPercentages,
+        question: poll.question,
+        votes: poll.numberOfVotes
+      }
+
+      return new Response(res, 200, 'Got Statistics', pollStatistics).send()
     })
     .catch(err => {
       return new Response(res, 500, err.message).send()
@@ -62,3 +80,4 @@ function vote (req, res) {
 module.exports.save = save
 module.exports.findByCode = findByCode
 module.exports.vote = vote
+module.exports.getPollStatistics = getPollStatistics
