@@ -32,6 +32,7 @@ const mutations = {
 
 const actions = {
   create ({ commit }, payload) {
+    commit('setError')
     PollService.create(payload)
       .then((res) => {
         if (res.data.success) {
@@ -43,9 +44,11 @@ const actions = {
       })
       .catch((err) => {
         console.log(err)
+        commit('setError', err)
       })
   },
   retrievePoll ({ commit }, code) {
+    commit('setError')
     PollService.retrievePoll(code)
       .then((res) => {
         if (res.data.success) {
@@ -56,6 +59,7 @@ const actions = {
       })
       .catch((err) => {
         console.log(err)
+        commit('setError', err)
       })
   },
   answerPoll ({ commit, state, rootState }, answers) {
@@ -64,12 +68,14 @@ const actions = {
       fingerPrint: rootState.fingerPrint,
       answers: answers
     }
+    commit('setError')
+
     PollService.answerPoll(body)
       .then((res) => {
         commit('goToRoute', { routeName: 'statistics', parameters: { code: state.code } })
       })
       .catch((err) => {
-        console.log(err)
+        commit('setError', err.response.data)
         commit('goToRoute', { routeName: 'statistics', parameters: { code: state.code } })
       })
   },
@@ -84,6 +90,7 @@ const actions = {
       })
       .catch((err) => {
         console.log(err)
+        commit('setError', err)
       })
   }
 }

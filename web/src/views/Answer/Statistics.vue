@@ -1,5 +1,8 @@
 <template>
   <div class="statistics">
+    <div class="error" v-if="error.message != null">
+      {{error.message}}
+    </div>
     <div class="question">
       {{ poll.question }}
       <p class="numOfVotes">
@@ -26,9 +29,12 @@ export default {
     ResultBar
   },
   computed: {
-    ...mapGetters(['getPoll']),
+    ...mapGetters(['getPoll', 'getError']),
     poll () {
       return this.getPoll
+    },
+    error () {
+      return this.getError
     }
   },
   methods: {

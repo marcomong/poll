@@ -43,7 +43,7 @@ function vote (req, res) {
   PollSchema.addVotes(pollCode, votingUserId, answers)
     .then(doc => {
       if(!doc) {
-        return new Response(res, 400, `Poll Code ${pollCode} does not exists or you have already voted`).send()
+        return new Response(res, 400, `Poll Code ${pollCode} does not exists`).send()
       }
       const poll = new Poll(doc.question, doc.answers, doc.votes, doc._id, null, doc.code)
       return new Response(res, 200, 'Vote added', poll.getPollInfo()).send()

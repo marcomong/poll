@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="header">Insert your 4 digits Poll Code</h1>
-    <input type="text" placeholder="1234" class="pollCode" maxlength="4" v-model="code">
+    <input type="text" placeholder="1234" class="pollCode" maxlength="4" v-model="code" @keyup.enter="goToRoute('poll')">
     <button class="btn" :class="{'btn__green': isCodeValid, 'btn__green-disabled': !isCodeValid}" :disabled="!isCodeValid" @click="goToRoute('poll')">Join Poll</button>
   </div>
 </template>
@@ -16,7 +16,9 @@ export default {
   },
   methods: {
     goToRoute (route) {
-      return this.$store.commit('goToRoute', { routeName: route, parameters: { code: this.code } })
+      if (this.isCodeValid) {
+        return this.$store.commit('goToRoute', { routeName: route, parameters: { code: this.code } })
+      }
     }
   },
   watch: {

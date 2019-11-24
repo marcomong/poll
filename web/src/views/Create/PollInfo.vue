@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     generatePollUrl () {
-      return `http://localhost:8080/poll/${this.poll.code}`
+      return `http://localhost:8080/answer/statistics/${this.poll.code}`
     },
     generateAnswerPollUrl () {
       return `http://localhost:8080/answer/poll/${this.poll.code}`

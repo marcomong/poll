@@ -49,23 +49,6 @@ function findByCode(code) {
 }
 
 function addVotes(pollCode, votingUserId, answers) {
-  const filter = {
-    $or: [
-      {
-        $and: [
-          {code: pollCode},
-          {votes : {$exists:true}, $where:'this.votes.length==0'}
-        ]
-      },
-      {
-        $and: [
-          {code: pollCode},
-          {votes : { $elemMatch: { votingUserId: { $ne: votingUserId } } }}
-        ]
-      }
-    ]
-  }
-  // const filter = {code: pollCode, votes: { $elemMatch: { votingUserId: {$ne: votingUserId}}}}
   const votesToAdd = [...answers.map(a => {
     const vote = {
       votingUserId: votingUserId,
@@ -73,8 +56,26 @@ function addVotes(pollCode, votingUserId, answers) {
     }
     return vote
   })]
-  const update = { $push: { votes: votesToAdd} }
-  return Poll.findOneAndUpdate(filter, update, {new: true})
+
+  return new Promise((resolve, reject) => {
+    this.findByCode(pollCode)
+    .then((poll) => {
+      if (poll.votes.length == 0) {
+        poll.votes =  votesToAdd
+        resolve(poll.save())
+      } else {
+        let votingUserIdExists = poll.votes.filter(v => v.votingUserId == votingUserId).length > 0
+        if(!votingUserIdExists) {
+          poll.votes = [poll.votes, ...votingUserId]
+          resolve(poll.save())
+        }
+        reject({message: `Ooops! Looks like you have already voted`})
+      }
+    })
+    .catch((err) => {
+      reject(err)
+    })
+  })
 }
 
 function getRandomInt(min, max) {

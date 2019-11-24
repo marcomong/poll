@@ -30,6 +30,7 @@ class Poll {
 
     var mapping = new Map(this.answers.map((a) => {
       a.totVotes = 0
+      a.percentage = 0
       return [a.id, a]
     }))
 
@@ -44,7 +45,9 @@ class Poll {
     let answersWithPercentage = []
 
     mapping.forEach((obj, key, map) => {
-      obj.percentage = obj.totVotes / totVotes * 100
+      if (totVotes > 0) {
+        obj.percentage = obj.totVotes / totVotes * 100
+      }
       let objPercentage = {
         value: obj.value,
         percentage: obj.percentage
