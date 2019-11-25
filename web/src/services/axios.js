@@ -1,8 +1,9 @@
 import axios from 'axios'
 import createAuthRefreshInterceptor from 'axios-auth-refresh'
+const config = require('../configuration/config')
 
 export const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost/api/' : 'http://localhost:8081/'
+  baseURL: config.axios.baseInstance
 })
 
 instance.interceptors.request.use(function (config) {
@@ -11,7 +12,7 @@ instance.interceptors.request.use(function (config) {
 })
 
 export const authInstance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost/authApi/' : 'http://localhost:8082/'
+  baseURL: config.axios.authInstance
 })
 
 authInstance.interceptors.request.use(function (config) {
@@ -20,7 +21,7 @@ authInstance.interceptors.request.use(function (config) {
 })
 
 export const pollInstance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost/authApi/' : 'http://localhost:8083/'
+  baseURL: config.axios.pollInstance
 })
 
 pollInstance.interceptors.request.use(function (config) {

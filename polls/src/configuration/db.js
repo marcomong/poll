@@ -4,7 +4,7 @@ const log = require('./logger')
 
 const mongodb_url = `mongodb://${config.db.server}:${config.db.name}/${config.db.name}`
 
-const connectionStatus = setInterval(() => {log.warn(`Connecting to db: ${config.db.name}`)}, 1000)
+const connectionStatus = setInterval(() => {log.warn(`Connecting to db: ${config.db.name} in server ${config.db.server}`)}, 1000)
 
 mongoose.connect(mongodb_url, {
   useNewUrlParser: true,

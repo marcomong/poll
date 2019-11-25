@@ -39,6 +39,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+const config = require('../../configuration/config')
+
 export default {
   computed: {
     ...mapGetters(['getPoll']),
@@ -48,10 +50,10 @@ export default {
   },
   methods: {
     generatePollUrl () {
-      return `http://localhost:8080/answer/statistics/${this.poll.code}`
+      return `${config.app.url}/answer/statistics/${this.poll.code}`
     },
     generateAnswerPollUrl () {
-      return `http://localhost:8080/answer/poll/${this.poll.code}`
+      return `${config.app.url}/answer/poll/${this.poll.code}`
     }
   }
 }

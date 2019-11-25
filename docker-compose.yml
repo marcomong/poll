@@ -9,36 +9,21 @@ services:
     ports:
       - '80:80'
     links:
-      - users
-      - auth
-  users:
-    build: ./users
-    expose:
-      - 8081
-    ports:
-      - '8081:8081'
+      - polls
     environment:
-      - AUTH_HOST=auth
-      - MONGODB_SERVER=mongo
-    volumes:
-      - ./users/src:/app/src
-    command: npm start
-    links:
-      - auth
-      - mongo
-  auth:
-    build: ./auth
-    expose:
-      - 8082
+      - AXIOS_INSTANCE=${AXIOS_INSTANCE}
+      - AXIOS_INSTANCE_AUTH=${AXIOS_INSTANCE_AUTH}
+      - AXIOS_INSTANCE_POLL=${AXIOS_INSTANCE_POLL}
+      - WEB_URL=${WEB_URL}
+  polls:
+    build: ./polls
+    restart: always
+    expose: 
+      - 8083
     ports:
-      - '8082:8082'
+      - '8083:8083'
     environment:
-      - MONGODB_SERVER=mongo
-    volumes:
-      - ./auth/src:/app/src
-    command: npm start
-    links:
-      - mongo
+      - DB_SERVER=${DB_SERVER}
   mongo:
     image: mongo
     expose:
