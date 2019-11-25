@@ -49,6 +49,7 @@ export default {
   },
   mounted () {
     this.fetchFingerprint()
+    this.$store.commit('assignCode')
   }
 }
 </script>

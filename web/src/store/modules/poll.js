@@ -27,6 +27,13 @@ const mutations = {
       return a
     })
     state.answers = tmpAnswers
+  },
+  setCodeLocaStorage (_, code) {
+    localStorage.setItem('code', code)
+  },
+  assignCode (state) {
+    let code = localStorage.getItem('code')
+    state.code = code == null ? '' : code
   }
 }
 
@@ -36,6 +43,7 @@ const actions = {
     PollService.create(payload)
       .then((res) => {
         commit('setPoll', res.data.body)
+        commit('setCodeLocaStorage', res.data.body.code)
         commit('goToRoute', { routeName: 'pollInfo' })
       })
       .catch((err) => {
@@ -45,6 +53,7 @@ const actions = {
   retrievePoll ({ commit }, code) {
     commit('setError')
     commit('setPoll', {})
+    commit('setCodeLocaStorage', code)
     PollService.retrievePoll(code)
       .then((res) => {
         commit('setPoll', res.data.body)
@@ -60,6 +69,7 @@ const actions = {
       answers: answers
     }
     commit('setError')
+    commit('setCodeLocaStorage', state.code)
 
     PollService.answerPoll(body)
       .then((res) => {
@@ -71,6 +81,7 @@ const actions = {
       })
   },
   retrievePollStatistics ({ commit }, code) {
+    commit('setCodeLocaStorage', code)
     PollService.retrievePollStatistics(code)
       .then((res) => {
         commit('setPoll', res.data.body)
