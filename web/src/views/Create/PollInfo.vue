@@ -3,22 +3,11 @@
     <h1 class="pollInfo__header">Save and share the poll!</h1>
     <div class="pollInfo__section">
       <div class="pollInfo__section__title">
-        Link
+        Answer
       </div>
       <div class="pollInfo__section__content">
         <div class="pollInfo__section__content__value">
           <a :href="generateAnswerPollUrl()">{{ generateAnswerPollUrl() }}</a>
-        </div>
-        <button class="btn btn__green btn-small">copy</button>
-      </div>
-    </div>
-    <div class="pollInfo__section">
-      <div class="pollInfo__section__title">
-        Code
-      </div>
-      <div class="pollInfo__section__content">
-        <div class="pollInfo__section__content__value">
-          {{ poll.code }}
         </div>
         <button class="btn btn__green btn-small">copy</button>
       </div>
@@ -30,6 +19,17 @@
       <div class="pollInfo__section__content">
         <div class="pollInfo__section__content__value">
           <a :href="generatePollUrl()">{{ generatePollUrl() }}</a>
+        </div>
+        <button class="btn btn__green btn-small">copy</button>
+      </div>
+    </div>
+    <div class="pollInfo__section">
+      <div class="pollInfo__section__title">
+        Code
+      </div>
+      <div class="pollInfo__section__content">
+        <div class="pollInfo__section__content__value">
+          {{ poll.code }}
         </div>
         <button class="btn btn__green btn-small">copy</button>
       </div>

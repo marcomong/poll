@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const log = require('../configuration/logger')
 
+const randomSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const maxLimitIteration = 1679616
+
 let voteSchema = new mongoose.Schema({
   votingUserId: String,
   answerId: Number
@@ -16,18 +19,19 @@ let pollSchema = new mongoose.Schema({
   question: String,
   answers: [answerSchema],
   votes: [voteSchema],
-  code: Number
+  code: String
 })
 
 module.exports = Poll = mongoose.model('Poll', pollSchema)
 
-function savePoll(poll) {
+async function savePoll(poll) {
+  let pollCode = await generatePollCode()
   let newPoll = new Poll({
     userId: null,
     question: poll.question,
     answers: poll.answers,
     votes: [],
-    code: 1234 //getRandomInt(1000, 9999)
+    code: pollCode //getRandomInt(1000, 9999)
   })
 
   return newPoll.save()
@@ -78,10 +82,33 @@ function addVotes(pollCode, votingUserId, answers) {
   })
 }
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function generatePollCode(attemptNumber = 0) {
+  let pollCode = randomString(4)
+  let filter = { code: pollCode }
+  return new Promise((resolve, reject) => {
+    Poll.findOne(filter)
+    .then((res) => {
+      if (res == null) {
+        return resolve(pollCode)
+      } else {
+        attemptNumber += 1
+        if( attemptNumber > maxLimitIteration) {
+          reject({message: 'Max number of poll reached'})
+        }
+        generatePollCode(attemptNumber)
+      }
+    })
+    .catch((err) => {
+      log.error('%o', err)
+      reject(err)
+    })
+  })
+}
+
+function randomString(length) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += randomSet[Math.floor(Math.random() * randomSet.length)];
+  return result;
 }
 
 module.exports.findByCode = findByCode

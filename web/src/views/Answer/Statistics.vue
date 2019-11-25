@@ -15,8 +15,8 @@
       :answer="statistic.value">
     </ResultBar>
     <div class="statistics__btn">
-      <button class="btn btn__green">JOIN NEW POLL</button>
-      <button class="btn btn__white">CREATE POLL</button>
+      <button class="btn btn__green" @click="goToRoute('pollCode')">JOIN NEW POLL</button>
+      <button class="btn btn__white" @click="goToRoute('definePoll')">CREATE POLL</button>
     </div>
   </div>
 </template>
@@ -41,6 +41,9 @@ export default {
     ...mapActions(['retrievePollStatistics']),
     loadPollStatistics (code) {
       return this.retrievePollStatistics(code)
+    },
+    goToRoute (name) {
+      this.$store.commit('goToRoute', { routeName: name })
     }
   },
   created () {

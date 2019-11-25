@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h1 class="header">Insert your 4 digits Poll Code</h1>
-    <input type="text" placeholder="1234" class="pollCode" maxlength="4" v-model="code" @keyup.enter="goToRoute('poll')">
+    <h1 class="header">Insert your poll Code</h1>
+    <input type="text" placeholder="code" class="pollCode" maxlength="4" v-model="code" @keyup.enter="goToRoute('poll')">
     <button class="btn" :class="{'btn__green': isCodeValid, 'btn__green-disabled': !isCodeValid}" :disabled="!isCodeValid" @click="goToRoute('poll')">Join Poll</button>
   </div>
 </template>

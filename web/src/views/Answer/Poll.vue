@@ -1,19 +1,25 @@
 <template>
   <div class="pollContainer">
-    <div class="question">
+    <div class="error" v-if="error.message != null">
+      {{error.message}}
+    </div>
+    <div class="question" v-if="error.message == null && poll != {}">
       {{ poll.question }}
     </div>
-    <div class="answersContainer">
+    <div class="answersContainer" v-if="error.message == null && poll != {}">
       <AnswerRadio v-for="answer in poll.answers" :key="answer.id + '_' + answer.selected"
         :value="answer"
         :isEditing= false
         @click.native="answerSelected(answer)">
       </AnswerRadio>
     </div>
-    <div>
+    <div v-if="error.message == null && poll != {}">
       <button class="btn btn__green" :class="{'btn__green-disabled': !canSendAnswer}" :disabled="!canSendAnswer" @click="sendVote()">Vote</button>
     </div>
-    <p class="answerPollCode">
+    <div v-else>
+      <button class="btn btn__white" @click="back()">BACK</button>
+    </div>
+    <p class="answerPollCode" v-if="error == null">
       Poll: <strong>{{ poll.code }}</strong>
     </p>
   </div>
@@ -30,9 +36,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPoll']),
+    ...mapGetters(['getPoll', 'getError']),
     poll () {
       return this.getPoll
+    },
+    error () {
+      return this.getError
     }
   },
   components: {
@@ -46,13 +55,14 @@ export default {
     },
     sendVote () {
       const answersSelected = [...this.poll.answers.filter(a => a.selected === true).map((a) => a.id)]
-      // console.log(answersSelected)
       this.answerPoll(answersSelected)
-      // this.$store.commit('goToRoute', { routeName: 'statistics', parameters: { code: this.code } })
     },
     loadPoll () {
       const code = this.$route.params.code
       return this.retrievePoll(code)
+    },
+    back () {
+      this.$router.go(-1)
     }
   },
   mounted () {

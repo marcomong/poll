@@ -35,30 +35,21 @@ const actions = {
     commit('setError')
     PollService.create(payload)
       .then((res) => {
-        if (res.data.success) {
-          commit('setPoll', res.data.body)
-          commit('goToRoute', { routeName: 'pollInfo' })
-        } else {
-          console.log('error')
-        }
+        commit('setPoll', res.data.body)
+        commit('goToRoute', { routeName: 'pollInfo' })
       })
       .catch((err) => {
-        console.log(err)
         commit('setError', err)
       })
   },
   retrievePoll ({ commit }, code) {
     commit('setError')
+    commit('setPoll', {})
     PollService.retrievePoll(code)
       .then((res) => {
-        if (res.data.success) {
-          commit('setPoll', res.data.body)
-        } else {
-          console.log('error')
-        }
+        commit('setPoll', res.data.body)
       })
       .catch((err) => {
-        console.log(err)
         commit('setError', err)
       })
   },
@@ -82,14 +73,9 @@ const actions = {
   retrievePollStatistics ({ commit }, code) {
     PollService.retrievePollStatistics(code)
       .then((res) => {
-        if (res.data.success) {
-          commit('setPoll', res.data.body)
-        } else {
-          console.log('error')
-        }
+        commit('setPoll', res.data.body)
       })
       .catch((err) => {
-        console.log(err)
         commit('setError', err)
       })
   }
