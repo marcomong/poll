@@ -1,8 +1,17 @@
 const { createLogger, format, transports } = require('winston')
-
+const fs = require('fs')
 const path = require('path')
 
 const logPath = path.join(__dirname, '../../Logs')
+if (!fs.existsSync(logPath)){
+  fs.mkdirSync(logPath);
+}
+if (!fs.existsSync(path.join(logPath,'Errors'))){
+  fs.mkdirSync(path.join(logPath,'Errors'))
+}
+if (!fs.existsSync(path.join(logPath,'Combined'))){
+  fs.mkdirSync(path.join(logPath,'Combined'));
+}
 
 const logFormatConsole = format.combine(
   format.colorize(),
