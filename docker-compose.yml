@@ -10,11 +10,6 @@ services:
       - '80:80'
     links:
       - polls
-    environment:
-      - AXIOS_INSTANCE=${AXIOS_INSTANCE}
-      - AXIOS_INSTANCE_AUTH=${AXIOS_INSTANCE_AUTH}
-      - AXIOS_INSTANCE_POLL=${AXIOS_INSTANCE_POLL}
-      - WEB_URL=${WEB_URL}
   polls:
     build: ./polls
     restart: always
