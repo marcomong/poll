@@ -67,7 +67,7 @@ export default {
       this.poll.answers.push(newAnswer)
     },
     deleteAnswer (answerToDelete) {
-      this.poll.answers = this.poll.answers.filter(a => a._id !== answerToDelete._id)
+      this.poll.answers = this.poll.answers.filter(a => a.id !== answerToDelete.id)
     },
     cancel () {
       this.$store.commit('goToRoute', { routeName: 'home' })
