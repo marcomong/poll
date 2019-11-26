@@ -9,7 +9,7 @@
         <div class="pollInfo__section__content__value">
           <a :href="generateAnswerPollUrl()">{{ generateAnswerPollUrl() }}</a>
         </div>
-        <button class="btn btn__green btn-small" @click="copy(generateAnswerPollUrl())">copy</button>
+        <button class="btn btn__green btn-small" v-clipboard:copy="generateAnswerPollUrl()">copy</button>
       </div>
     </div>
     <div class="pollInfo__section">
@@ -20,7 +20,7 @@
         <div class="pollInfo__section__content__value">
           <a :href="generatePollUrl()">{{ generatePollUrl() }}</a>
         </div>
-        <button class="btn btn__green btn-small" @click="copy(generatePollUrl())">copy</button>
+        <button class="btn btn__green btn-small" v-clipboard:copy="generatePollUrl()">copy</button>
       </div>
     </div>
     <div class="pollInfo__section">
@@ -31,7 +31,7 @@
         <div class="pollInfo__section__content__value" id="pollCode">
           {{ poll.code }}
         </div>
-        <button class="btn btn__green btn-small" @click="copy(poll.code)">copy</button>
+        <button class="btn btn__green btn-small"  v-clipboard:copy="poll.code">copy</button>
       </div>
     </div>
   </div>
@@ -54,9 +54,6 @@ export default {
     },
     generateAnswerPollUrl () {
       return `${config.app.url}/answer/poll/${this.poll.code}`
-    },
-    copy (value) {
-      this.$copyText(value)
     }
   }
 }
